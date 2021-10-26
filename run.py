@@ -2,6 +2,15 @@
 from bauhaus import Encoding, proposition, constraint
 from bauhaus.utils import count_solutions, likelihood
 
+
+board[5][4]
+size_x = 5
+size_y = 4
+king
+p1, p2, p3, p4
+
+
+
 # Encoding that will store all of your constraints
 E = Encoding()
 
