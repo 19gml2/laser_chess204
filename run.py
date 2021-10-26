@@ -6,9 +6,10 @@ from bauhaus.utils import count_solutions, likelihood
 E = Encoding()
 
 
-board[5][4]
+
 size_x = 5
 size_y = 4
+board[size_x][size_y]
 king
 p1, p2, p3, p4
 
@@ -52,13 +53,7 @@ y = FancyPropositions("y")
 z = FancyPropositions("z")
 
 
-board = []
-for x in range(sizex)
-    xaxis = []
-    for y in range(sizey):
-        yaxis = []
-    grid.append(xaxis)
-    grid.append(yaxis)
+
 # Build an example full theory for your setting and return it.
 #
 #  There should be at least 10 variables, and a sufficiently large formula to describe it (>50 operators).
