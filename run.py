@@ -264,29 +264,30 @@ def laser_constraints():
     # Laser cannot be in more than one x or y value at the same time.
     E.add_constraint(l.x_val[0] | l.x_val[1] | l.x_val[2] | l.x_val[3] | l.x_val[4])
     E.add_constraint(l.y_val[0] | l.y_val[1] | l.y_val[2] | l.y_val[3])
+    # Laser cannot have more than one direction.
     E.add_constraint(l.d_val[0] | l.d_val[1] | l.d_val[2] | l.d_val[3])
 
     # Laser continues if it does not make contact with any pieces and does not go out of bounds.
     for i in range(5):
         for j in range(4):
             (l.x_val[i] =! p1.x_val[i] and l.y_val[j] =! p1.y_val[j] and
-        l.x_val =! p2.x_val and l.y_val =! p2.y_val and
-        l.x_val =! p3.x_val and l.y_val =! p3.y_val and
-        l.x_val =! p4.x_val and l.y_val =! p4.y_val):
+             l.x_val[i] =! p2.x_val[i] and l.y_val[j] =! p2.y_val[j] and
+             l.x_val[i] =! p3.x_val[i] and l.y_val[j] =! p3.y_val[j] and
+             l.x_val[i] =! p4.x_val[i] and l.y_val[j] =! p4.y_val[j]):
 
         # Check if laser goes out of bounds based on x/y value and direction.
         # d.val 0 = N
-        if (l.d_val[0] and l.y_val[3]):
-            E.add_constraint()
+        if (l.d_val[0] == true and l.y_val[3] == true):
+            E.add_constraint((l.y_val[4]).negate())
         # d.val 1 = E
-        elif (l.d_val == 1 and l.x_val < 4):
-            E.add_constraint()
+        elif (l.d_val[1] == true and l.x_val[4] == true):
+            E.add_constraint((l.x_val[5]).negate())
         # d.val 2 = S
-        elif (l.d_val == 2 and l.y_val > 0):
-            E.add_constraint()
+        elif (l.d_val[2] == true and l.y_val[0] == true):
+            E.add_constraint(l.y_val[-1]).negate())
         # d.val 3 = W
-        elif (l.d_val == 3 and l.x_val > 0):
-            E.add_constraint()
+        elif (l.d_val[3] == true and l.x_val[0] == true):
+            E.add_constraint(l.x_val[-1]).negate())
 
 # Build an example full theory for your setting and return it.
 #
