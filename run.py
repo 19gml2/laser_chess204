@@ -132,7 +132,40 @@ Class Laser():
                 d_val[i-1] = True
             
                 
+def piece_theory():
 
+    all_pieces = [p1, p2, p3, p4]
+    for i in all_pieces:
+        E.add_constraint(i.x_val[0] | i.x_val[1] | i.x_val[2] | i.x_val[3] | i.x_val[4])
+        E.add_constraint(i.y_val[0] | i.y_val[1] | i.y_val[2] | i.y_val[3])
+        E.add_constraint(i.d_val[0] | i.d_val[1] | i.d_val[2] | i.d_val[3])
+
+        
+        for j in range(5):
+            for k in range(5):
+                if (k != j):
+                    E.add_constraint(~(i.x_val[j] & i.x_val[k]))
+        for j in range(4):
+            for k in range(4):
+                if (k != j):
+                    E.add_constraint(~(i.y_val[j] & i.y_val[k]))
+                    E.add_constraint(~(i.d_val[j] & i.d_val[k]))
+                    
+        #cannot take up the same spot as another piece
+        for j in all_pieces:
+            for k in range(5):
+                for p in range(4):
+                    if (i != j):
+                        E.add_constraint(~((i.x_val[k] & j.x_val[k]) & (i.y_val[p] & j.y_val[p]))
+
+                        #king cannot be in the same spot
+                        if (k == 3)
+                            E.add_constraint(~((i.x_val[k]) & (i.y_val[p] & j.y_val[p]))
+
+         
+        
+    return E
+                
 l = Laser()
 # Build an example full theory for your setting and return it.
 #
