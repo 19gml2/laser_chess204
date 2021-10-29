@@ -133,7 +133,7 @@ Class Laser():
             
                 
 
-laser = Laser()
+l = Laser()
 # Build an example full theory for your setting and return it.
 #
 #  There should be at least 10 variables, and a sufficiently large formula to describe it (>50 operators).
