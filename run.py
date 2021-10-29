@@ -12,57 +12,121 @@ size_y = 4
 board = [size_x][size_y]
 
 #sits on the last col of the grid, can be initialized along this line
-class king(pos_y):
-    y_val = []
-    def init_king():
-        for y in range(size_y):
-            y_val.append(False)
-        y_val[pos_y] = True
-        return y_val
+class king:
+    y_val = [4]
+    def __init__(self, y):
+        
+        for i in range(size_y):
+            self.y_val[i] = False
+        
+        self.y_val[y] = True;
+        
+    def inc_y():
+        
+        for i in range(size_y):
+            if (y_val[i] == True) and (i < 4):
+                c = i
+            
+            if (c != None):
+                y_val[c] = False
+                y_val[c+y] = True
+                
+     def dec_y():
+        
+        for i in range(size_y):
+            if (y_val[i] == True) and (i < 0):
+                c = i
+            
+            if (c != None):
+                y_val[c] = False
+                y_val[c+y] = True
+            
 
 #d for Piece represents the ordinal direction of the mirrored side
 #0 = NE
 #1 = SE
 #2 = SW
 #3 = NW
-def init_Piece(pos_x, pos_y, d):
-    col = []
-    for x in range(size_x):
-        row = []
-        for y in range(size_y):
-            dirc = []
-            for i in range(4):
-                dirc.append(False)
-            row.append(dirc)
-        col.append(row)
-    col[pos_x][pos_y][d] = True
-    return col
+
 
 #d means something different for laser vs piece
 #0 = N
 #1 = E
 #2 = S
 #3 = W
-def init_Laser(pos_x, pos_y, d):
-    col = []
-    for x in range(size_x):
-        row = []
-        for y in range(size_y):
-            dirc = []
-            for i in range(4):
-                dirc.append(False)
-            row.append(dirc)
-        col.append(row)
-    col[pos_x][pos_y][d] = True
-    return col
-
-
-p1 = init_Piece()
-p2 = init_Piece()
-p3 = init_Piece()
-p4 = init_Piece()
-k = init_King()
-l = init_Laser(0, 0, 1)
+Class Laser:
+    
+    def __init__(self, x, y, d):
+        
+        for i in range(size_y):
+            self.x_val[i] = False
+            self.y_val[i] = False
+            self.d_val[i] = False
+        self.x_val[4] = False
+        
+        self.x_val[x] = True
+        self.y_val[y] = True
+        self.d_val[d] = True
+    
+     def inc_x():
+        
+        for i in range(size_x):
+            if (x_val[i] == True) and (i < size_x):
+                c = i
+            
+            if (c != None):
+                x_val[c] = False
+                x_val[c+1] = True
+                
+     def dec_x():
+        
+        for i in range(size_x):
+            if (x_val[i] == True) and (i > 0):
+                c = i
+            
+            if (c != None):
+                x_val[c] = False
+                x_val[c+1] = True 
+                
+    def inc_y():
+        
+        for i in range(size_y):
+            if (y_val[i] == True) and (i < size_y):
+                c = i
+            
+            if (c != None):
+                y_val[c] = False
+                y_val[c+1] = True
+                
+     def dec_y():
+        
+        for i in range(size_y):
+            if (y_val[i] == True) and (i > 0):
+                c = i
+            
+            if (c != None):
+                y_val[c] = False
+                y_val[c+1] = True
+                
+    def rotr():
+        
+        for i in range(4):
+            if (d_val[i] == True):
+                if (i == 3):
+                    d_val[i] = False
+                    d_val[0] = True
+                else:
+                    d_val[i] = False
+                    d_val[i+1] = True
+                    
+    def rotl():
+        
+        for i in range(4):
+            if (d_val[i] == True):
+                d_val[i] = False
+                d_val[i-1] = True
+            
+                
 
 
 # Build an example full theory for your setting and return it.
