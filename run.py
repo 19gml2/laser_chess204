@@ -146,13 +146,6 @@ class King():
 #2 = SW
 #3 = NW
 
-king = King()
-p1 = Piece()
-p2 = Piece()
-p3 = Piece()
-p4 = Piece()
-l = Laser()
-
 class Laser():
     
     def __init__(self, x, y, d):
@@ -225,7 +218,14 @@ class Laser():
                 d_val[i] = false
                 d_val[i-1] = true
             
-                
+#makes instances
+king = King()
+p1 = Piece()
+p2 = Piece()
+p3 = Piece()
+p4 = Piece()
+l = Laser()
+
 def piece_theory():
 
     all_pieces = [p1, p2, p3, p4]
