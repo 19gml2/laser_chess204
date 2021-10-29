@@ -105,25 +105,26 @@ board = [size_x][size_y]
 
 #sits on the last col of the grid, can be initialized along this line
 class King():
-    y_val = [4]
+    
     def __init__(self, y):
-        
+        self.y = y
+        self.y_val = []
         for i in range(size_y):
             self.y_val[i] = false
         
         self.y_val[y] = true;
         
-    def inc_y():
+    def inc_y(self):
         
         for i in range(size_y):
-            if (y_val[i] == true) and (i < 4):
+            if (self.y_val[i] == true) and (i < 3):
                 c = i
             
             if (c != None):
-                y_val[c] = false
-                y_val[c+y] = true
+                self.y_val[c] = false
+                self.y_val[c+1] = true
                 
-     def dec_y():
+     def dec_y(self):
         
         for i in range(size_y):
             if (y_val[i] == true) and (i < 0):
