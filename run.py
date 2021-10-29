@@ -159,7 +159,7 @@ def piece_theory():
                         E.add_constraint(~((i.x_val[k] & j.x_val[k]) & (i.y_val[p] & j.y_val[p]))
 
                         #king cannot be in the same spot
-                        if (k == 3)
+                        if (k == 4)
                             E.add_constraint(~((i.x_val[k]) & (i.y_val[p] & j.y_val[p]))
 
          
