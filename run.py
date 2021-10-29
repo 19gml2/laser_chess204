@@ -12,7 +12,7 @@ size_y = 4
 board = [size_x][size_y]
 
 #sits on the last col of the grid, can be initialized along this line
-class king:
+class King():
     y_val = [4]
     def __init__(self, y):
         
@@ -42,6 +42,7 @@ class king:
                 y_val[c+y] = True
             
 
+king = King()
 #d for Piece represents the ordinal direction of the mirrored side
 #0 = NE
 #1 = SE
@@ -49,12 +50,16 @@ class king:
 #3 = NW
 
 
+p1 = Piece()
+p2 = Piece()
+p3 = Piece()
+p4 = Piece()
 #d means something different for laser vs piece
 #0 = N
 #1 = E
 #2 = S
 #3 = W
-Class Laser:
+Class Laser():
     
     def __init__(self, x, y, d):
         
@@ -128,7 +133,7 @@ Class Laser:
             
                 
 
-
+laser = Laser()
 # Build an example full theory for your setting and return it.
 #
 #  There should be at least 10 variables, and a sufficiently large formula to describe it (>50 operators).
