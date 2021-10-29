@@ -6,7 +6,98 @@ from nnf import true, false
 # Encoding that will store all of your constraints
 E = Encoding()
 
-
+class Piece:
+    
+    def __init__(self, x, y, d):
+        
+        self.x = x
+        self.y = y
+        self.d = d
+        self.xval = []
+        self.yval = []
+        self.dval = []
+    
+        #initialize all fields with false arrays
+        for i in range(4):
+            self.xval.append(false)
+            self.yval.append(false)
+            self.dval.append(false)
+        self.xval.append(false)
+        
+        #set one item in each array to true, so e.g. x_val=[F, F, T, F, F], y_val=[F, T, F, F], d_val = [F, F, F, T]
+        #denotes a piece at (3, 2) with mirrored side facing NW.
+        self.xval[x] = true
+        self.yval[y] = true
+        self.dval[d] = true
+        
+    #variables for modifying position and orientation of pieces, to be used in constraint code
+    def inc_x(self):
+        for i in range(5):
+            if (self.xval[i] == true) and (i < 4):
+                c = i
+        
+        if (c != None):
+            self.xval[c] = false
+            self.xval[c+1] = true
+            return 1
+        return 0
+            
+    def dec_x(self):
+        for i in range(5):
+            if (self.xval[i] == true):
+                c = i
+        
+        if (c != None):
+            self.xval[c] = false
+            self.xval[c-1] = true
+            return 1
+        return 0
+    
+    def inc_y(self):
+        for i in range(4):
+            if (self.yval[i] == true) and (i < 3):
+                c = i
+        
+        if (c != None):
+            self.yval[c] = false
+            self.yval[c+1] = true
+            return 1
+        return 0
+    
+    def dec_y(self):
+        for i in range(4):
+            if (self.yval[i] == true):
+                c = i
+        
+        if (c != None):
+            self.yval[c] = false
+            self.yval[c-1] = true
+            return 1
+        return 0
+    
+    def rotr(self):
+        for i in range(4):
+            if (self.dval[i] == true):
+                c = i
+        
+        if (c != None):
+            if (c < 3):
+                self.dval[c] = false
+                self.dval[c+1] = true
+            else:
+                self.dval = [true, false, false, false]
+            return 1
+        return 0
+        
+    def rotl(self):
+        for i in range(4):
+            if (self.dval[i] == true):
+                c = i
+        if (c != None):
+                self.dval[c] = false
+                self.dval[c-1] = true
+                return 1
+        return 0
 
 size_x = 5
 size_y = 4
