@@ -11,6 +11,7 @@ size_x = 5
 size_y = 4
 board = [size_x][size_y]
 
+#sits on the last col of the grid, can be initialized along this line
 def init_King(pos_y):
     grid = []
     for y in range(size_y):
@@ -53,8 +54,6 @@ def init_Laser(pos_x, pos_y, d):
         col.append(row)
     col[pos_x][pos_y][d] = True
     return col
-            
-        
 
 
 p1 = init_Piece()
@@ -62,20 +61,7 @@ p2 = init_Piece()
 p3 = init_Piece()
 p4 = init_Piece()
 k = init_King()
-l = init_Laser()
-l[0][0][1] = True
-
-
-
-b = BasicPropositions("b")   
-c = BasicPropositions("c")
-d = BasicPropositions("d")
-e = BasicPropositions("e")
-# At least one of these will be true
-x = FancyPropositions("x")
-y = FancyPropositions("y")
-z = FancyPropositions("z")
-
+l = init_Laser(0, 0, 1)
 
 
 # Build an example full theory for your setting and return it.
