@@ -12,12 +12,13 @@ size_y = 4
 board = [size_x][size_y]
 
 #sits on the last col of the grid, can be initialized along this line
-def init_King(pos_y):
-    grid = []
-    for y in range(size_y):
-        grid.append("-")
-    grid[pos_y] = True
-    return grid
+class king(pos_y):
+    y_val = []
+    def init_king():
+        for y in range(size_y):
+            y_val.append(False)
+        y_val[pos_y] = True
+        return y_val
 
 #d for Piece represents the ordinal direction of the mirrored side
 #0 = NE
@@ -31,7 +32,7 @@ def init_Piece(pos_x, pos_y, d):
         for y in range(size_y):
             dirc = []
             for i in range(4):
-                dirc.append("-")
+                dirc.append(False)
             row.append(dirc)
         col.append(row)
     col[pos_x][pos_y][d] = True
@@ -49,7 +50,7 @@ def init_Laser(pos_x, pos_y, d):
         for y in range(size_y):
             dirc = []
             for i in range(4):
-                dirc.append("-")
+                dirc.append(False)
             row.append(dirc)
         col.append(row)
     col[pos_x][pos_y][d] = True
@@ -69,8 +70,12 @@ l = init_Laser(0, 0, 1)
 #  There should be at least 10 variables, and a sufficiently large formula to describe it (>50 operators).
 #  This restriction is fairly minimal, and if there is any concern, reach out to the teaching staff to clarify
 #  what the expectations are.
-def example_theory():
+
+def ():
     # Add custom constraints by creating formulas with the variables you created. 
+    for x in range(size_x):
+        E.add_constraint(
+    
     E.add_constraint((a | b) & ~x)
     # Implication
     E.add_constraint(y >> z)
