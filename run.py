@@ -17,89 +17,89 @@ class Piece:
         self.x = x
         self.y = y
         self.d = d
-        self.xval = []
-        self.yval = []
-        self.dval = []
+        self.x_val = []
+        self.y_val = []
+        self.d_val = []
     
         #initialize all fields with false arrays
         for i in range(4):
-            self.xval.append(false)
-            self.yval.append(false)
-            self.dval.append(false)
-        self.xval.append(false)
+            self.x_val.append(false)
+            self.y_val.append(false)
+            self.d_val.append(false)
+        self.x_val.append(false)
         
         #set one item in each array to true, so e.g. x_val=[F, F, T, F, F], y_val=[F, T, F, F], d_val = [F, F, F, T]
         #denotes a piece at (3, 2) with mirrored side facing NW.
-        self.xval[x] = true
-        self.yval[y] = true
-        self.dval[d] = true
+        self.x_val[x] = true
+        self.y_val[y] = true
+        self.d_val[d] = true
         
     #variables for modifying position and orientation of pieces, to be used in constraint code
     def inc_x(self):
         for i in range(5):
-            if (self.xval[i] == true) and (i < 4):
+            if (self.x_val[i] == true) and (i < 4):
                 c = i
         
         if (c != None):
-            self.xval[c] = false
-            self.xval[c+1] = true
+            self.x_val[c] = false
+            self.x_val[c+1] = true
             return 1
         return 0
             
     def dec_x(self):
         for i in range(5):
-            if (self.xval[i] == true):
+            if (self.x_val[i] == true):
                 c = i
         
         if (c != None):
-            self.xval[c] = false
-            self.xval[c-1] = true
+            self.x_val[c] = false
+            self.x_val[c-1] = true
             return 1
         return 0
     
     def inc_y(self):
         for i in range(4):
-            if (self.yval[i] == true) and (i < 3):
+            if (self.y_val[i] == true) and (i < 3):
                 c = i
         
         if (c != None):
-            self.yval[c] = false
-            self.yval[c+1] = true
+            self.y_val[c] = false
+            self.y_val[c+1] = true
             return 1
         return 0
     
     def dec_y(self):
         for i in range(4):
-            if (self.yval[i] == true):
+            if (self.y_val[i] == true):
                 c = i
         
         if (c != None):
-            self.yval[c] = false
-            self.yval[c-1] = true
+            self.y_val[c] = false
+            self.y_val[c-1] = true
             return 1
         return 0
     
     def rotr(self):
         for i in range(4):
-            if (self.dval[i] == true):
+            if (self.d_val[i] == true):
                 c = i
         
         if (c != None):
             if (c < 3):
-                self.dval[c] = false
-                self.dval[c+1] = true
+                self.d_val[c] = false
+                self.d_val[c+1] = true
             else:
-                self.dval = [true, false, false, false]
+                self.d_val = [true, false, false, false]
             return 1
         return 0
         
     def rotl(self):
         for i in range(4):
-            if (self.dval[i] == true):
+            if (self.d_val[i] == true):
                 c = i
         if (c != None):
-                self.dval[c] = false
-                self.dval[c-1] = true
+                self.d_val[c] = false
+                self.d_val[c-1] = true
                 return 1
         return 0
 
