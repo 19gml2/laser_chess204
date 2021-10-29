@@ -11,44 +11,62 @@ size_x = 5
 size_y = 4
 board = [size_x][size_y]
 
+def init_King(pos_y):
+    grid = []
+    for y in range(size_y):
+        grid.append("-")
+    grid[pos_y] = True
+    return grid
+
+#d for Piece represents the ordinal direction of the mirrored side
+#0 = NE
+#1 = SE
+#2 = SW
+#3 = NW
+def init_Piece(pos_x, pos_y, d):
+    col = []
+    for x in range(size_x):
+        row = []
+        for y in range(size_y):
+            dirc = []
+            for i in range(4):
+                dirc.append("-")
+            row.append(dirc)
+        col.append(row)
+    col[pos_x][pos_y][d] = True
+    return col
+
+#d means something different for laser vs piece
+#0 = N
+#1 = E
+#2 = S
+#3 = W
+def init_Laser(pos_x, pos_y, d):
+    col = []
+    for x in range(size_x):
+        row = []
+        for y in range(size_y):
+            dirc = []
+            for i in range(4):
+                dirc.append("-")
+            row.append(dirc)
+        col.append(row)
+    col[pos_x][pos_y][d] = True
+    return col
+            
+        
+
+
+p1 = init_Piece()
+p2 = init_Piece()
+p3 = init_Piece()
+p4 = init_Piece()
+k = init_King()
+l = init_Laser()
+l[0][0][1] = True
 
 
 
-# To create propositions, create classes for them first, annotated with "@proposition" and the Encoding
-@proposition(E)
-class BasicPropositions:
-
-    def __init__(self, data):
-        self.data = data
-
-    def __repr__(self):
-        return f"A.{self.data}"
-    
-@proposition(E)
-class King:
-    
-    def __init__(self, data):
-        self.data = data
-    
-
-
-# Different classes for propositions are useful because this allows for more dynamic constraint creation
-# for propositions within that class. For example, you can enforce that "at least one" of the propositions
-# that are instances of this class must be true by using a @constraint decorator.
-# other options include: at most one, exactly one, at most k, and implies all.
-# For a complete module reference, see https://bauhaus.readthedocs.io/en/latest/bauhaus.html
-@constraint.at_least_one(E)
-@proposition(E)
-class FancyPropositions:
-
-    def __init__(self, data):
-        self.data = data
-
-    def __repr__(self):
-        return f"A.{self.data}"
-
-# Call your variables whatever you want
-a = BasicPropositions("a")
 b = BasicPropositions("b")   
 c = BasicPropositions("c")
 d = BasicPropositions("d")
