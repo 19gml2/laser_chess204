@@ -1,6 +1,7 @@
 
 from bauhaus import Encoding, proposition, constraint
 from bauhaus.utils import count_solutions, likelihood
+from nnf import true, false
 
 # Encoding that will store all of your constraints
 E = Encoding()
@@ -174,14 +175,16 @@ def laser_constraints():
     E.add_constraint(l.d_val[0] | l.d_val[1] | l.d_val[2] | l.d_val[3])
 
     # Laser continues if it does not make contact with any pieces and does not go out of bounds.
-    if (l.x_val =! p1.x_val and l.y_val =! p1.y_val and
+    for i in range(5):
+        for j in range(4):
+            (l.x_val[i] =! p1.x_val[i] and l.y_val[j] =! p1.y_val[j] and
         l.x_val =! p2.x_val and l.y_val =! p2.y_val and
         l.x_val =! p3.x_val and l.y_val =! p3.y_val and
         l.x_val =! p4.x_val and l.y_val =! p4.y_val):
 
         # Check if laser goes out of bounds based on x/y value and direction.
         # d.val 0 = N
-        if (l.d_val == 0 and l.y_val = 3):
+        if (l.d_val[0] and l.y_val[3]):
             E.add_constraint()
         # d.val 1 = E
         elif (l.d_val == 1 and l.x_val < 4):
