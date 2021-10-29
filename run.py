@@ -10,8 +10,7 @@ E = Encoding()
 size_x = 5
 size_y = 4
 board = [size_x][size_y]
-king
-p1, p2, p3, p4
+
 
 
 
