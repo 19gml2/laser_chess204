@@ -170,7 +170,8 @@ def laser_constraints():
 
     # Laser cannot be in more than one x or y value at the same time.
     E.add_constraint(l.x_val[0] | l.x_val[1] | l.x_val[2] | l.x_val[3] | l.x_val[4])
-    E.add_constraint(l.y_val[0] | l.y_val[1] | l.y_val[2] | l.y_val[3] | l.y_val[4])
+    E.add_constraint(l.y_val[0] | l.y_val[1] | l.y_val[2] | l.y_val[3])
+    E.add_constraint(l.d_val[0] | l.d_val[1] | l.d_val[2] | l.d_val[3])
 
     # Laser continues if it does not make contact with any pieces and does not go out of bounds.
     if (l.x_val =! p1.x_val and l.y_val =! p1.y_val and
@@ -180,7 +181,7 @@ def laser_constraints():
 
         # Check if laser goes out of bounds based on x/y value and direction.
         # d.val 0 = N
-        if (l.d_val == 0 and l.y_val < 3):
+        if (l.d_val == 0 and l.y_val = 3):
             E.add_constraint()
         # d.val 1 = E
         elif (l.d_val == 1 and l.x_val < 4):
