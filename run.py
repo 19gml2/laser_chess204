@@ -295,7 +295,7 @@ def laser_constraints():
 #  This restriction is fairly minimal, and if there is any concern, reach out to the teaching staff to clarify
 #  what the expectations are.
 
-def ():
+def constraint_function():
     # Add custom constraints by creating formulas with the variables you created. 
     for x in range(size_x):
         E.add_constraint(
