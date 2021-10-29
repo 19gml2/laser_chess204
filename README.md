@@ -3,7 +3,7 @@
 
 Welcome to the major project for CISC/CMPE 204 (Fall 2021)!
 
-Our project take a 5x4 board for the game laser chess radomly places the piece on the board for the excpetion of the laser and finds out if there is a possibility to win the game by doing 0 or 1 move. The constraints are basically the moves allowed in laser chess and the model will be a sucess if the laser reaches the king.
+Our project take a 5x4 board for the game laser chess randomly places the piece on the board with the excpetion of the laser and finds out if there is a possibility to win the game by doing 0 or 1 move. The constraints are basically the moves allowed in laser chess and the model will be a sucess if the laser reaches the king.
 
 ## Structure
 
