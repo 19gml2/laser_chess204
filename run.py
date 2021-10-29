@@ -29,7 +29,7 @@ class BasicPropositions:
 class King:
     
     def __init__(self, data):
-        self.data = data;
+        self.data = data
     
 
 
