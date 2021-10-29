@@ -18,29 +18,29 @@ class King():
     def __init__(self, y):
         
         for i in range(size_y):
-            self.y_val[i] = False
+            self.y_val[i] = false
         
-        self.y_val[y] = True;
+        self.y_val[y] = true;
         
     def inc_y():
         
         for i in range(size_y):
-            if (y_val[i] == True) and (i < 4):
+            if (y_val[i] == true) and (i < 4):
                 c = i
             
             if (c != None):
-                y_val[c] = False
-                y_val[c+y] = True
+                y_val[c] = false
+                y_val[c+y] = true
                 
      def dec_y():
         
         for i in range(size_y):
-            if (y_val[i] == True) and (i < 0):
+            if (y_val[i] == true) and (i < 0):
                 c = i
             
             if (c != None):
-                y_val[c] = False
-                y_val[c+y] = True
+                y_val[c] = false
+                y_val[c+y] = true
             
 #d means something different for laser vs piece
 #0 = N
@@ -66,72 +66,72 @@ class Laser():
     def __init__(self, x, y, d):
         
         for i in range(size_y):
-            self.x_val[i] = False
-            self.y_val[i] = False
-            self.d_val[i] = False
-        self.x_val[4] = False
+            self.x_val[i] = false
+            self.y_val[i] = false
+            self.d_val[i] = false
+        self.x_val[4] = false
         
-        self.x_val[x] = True
-        self.y_val[y] = True
-        self.d_val[d] = True
+        self.x_val[x] = true
+        self.y_val[y] = true
+        self.d_val[d] = true
     
      def inc_x():
         
         for i in range(size_x):
-            if (x_val[i] == True) and (i < size_x):
+            if (x_val[i] == true) and (i < size_x):
                 c = i
             
             if (c != None):
-                x_val[c] = False
-                x_val[c+1] = True
+                x_val[c] = false
+                x_val[c+1] = true
                 
      def dec_x():
         
         for i in range(size_x):
-            if (x_val[i] == True) and (i > 0):
+            if (x_val[i] == true) and (i > 0):
                 c = i
             
             if (c != None):
-                x_val[c] = False
-                x_val[c+1] = True 
+                x_val[c] = false
+                x_val[c+1] = true 
                 
     def inc_y():
         
         for i in range(size_y):
-            if (y_val[i] == True) and (i < size_y):
+            if (y_val[i] == true) and (i < size_y):
                 c = i
             
             if (c != None):
-                y_val[c] = False
-                y_val[c+1] = True
+                y_val[c] = false
+                y_val[c+1] = true
                 
      def dec_y():
         
         for i in range(size_y):
-            if (y_val[i] == True) and (i > 0):
+            if (y_val[i] == true) and (i > 0):
                 c = i
             
             if (c != None):
-                y_val[c] = False
-                y_val[c+1] = True
+                y_val[c] = false
+                y_val[c+1] = true
                 
     def rotr():
         
         for i in range(4):
-            if (d_val[i] == True):
+            if (d_val[i] == true):
                 if (i == 3):
-                    d_val[i] = False
-                    d_val[0] = True
+                    d_val[i] = false
+                    d_val[0] = true
                 else:
-                    d_val[i] = False
-                    d_val[i+1] = True
+                    d_val[i] = false
+                    d_val[i+1] = true
                     
     def rotl():
         
         for i in range(4):
-            if (d_val[i] == True):
-                d_val[i] = False
-                d_val[i-1] = True
+            if (d_val[i] == true):
+                d_val[i] = false
+                d_val[i-1] = true
             
                 
 def piece_theory():
