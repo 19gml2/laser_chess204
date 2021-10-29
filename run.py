@@ -6,6 +6,10 @@ from nnf import true, false
 # Encoding that will store all of your constraints
 E = Encoding()
 
+size_x = 5
+size_y = 4
+board = [size_x][size_y]
+
 class Piece:
     
     def __init__(self, x, y, d):
@@ -99,40 +103,42 @@ class Piece:
                 return 1
         return 0
 
-size_x = 5
-size_y = 4
-board = [size_x][size_y]
 
 #sits on the last col of the grid, can be initialized along this line
-class King():
+class King:
     
     def __init__(self, y):
         self.y = y
         self.y_val = []
         for i in range(size_y):
-            self.y_val[i] = false
-        
+            self.y_val.append(false)
         self.y_val[y] = true;
         
     def inc_y(self):
         
-        for i in range(size_y):
-            if (self.y_val[i] == true) and (i < 3):
-                c = i
+        c = self.y
             
-            if (c != None):
+        if (c != None):
+            if (c < 3):
                 self.y_val[c] = false
                 self.y_val[c+1] = true
+            else:
+                self.y_val = [true, false, false, false]
+            return 1
+        return 0
                 
-     def dec_y(self):
+    def dec_y(self):
         
-        for i in range(size_y):
-            if (y_val[i] == true) and (i < 0):
-                c = i
-            
-            if (c != None):
-                y_val[c] = false
-                y_val[c+y] = true
+        c = self.y
+                    
+        if (c != None):
+            if (c > 0):
+                self.y_val[c] = false
+                self.y_val[c-1] = true
+            else:
+                self.y_val = [false, false, false, true]
+            return 1
+        return 0
             
 #d means something different for laser vs piece
 #0 = N
