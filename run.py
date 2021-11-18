@@ -6,17 +6,23 @@ from nnf import true, false
 # Encoding that will store all of your constraints
 E = Encoding()
 
+#board constraints
 size_x = 5
 size_y = 4
 board = [size_x][size_y]
 
+#represents a single piece on the board and stores it's coordinates and which way it faces
 class Piece:
     
+    #initializes piece, gives coordinates and direction
     def __init__(self, x, y, d):
         
+        #d for direction
         self.x = x
         self.y = y
         self.d = d
+        
+        #array of booleans that holds true when the piece is in a spot
         self.x_val = []
         self.y_val = []
         self.d_val = []
@@ -84,7 +90,7 @@ class Piece:
             return 1
         return 0
     
-    
+    #rotates the piece right by 90 degrees
     def rotr(self):
         for i in range(4):
             if (self.d_val[i] == true):
@@ -98,7 +104,8 @@ class Piece:
                 self.d_val = [true, false, false, false]
             return 1
         return 0
-        
+    
+    #rotates the piece left by 90 degrees
     def rotl(self):
         for i in range(4):
             if (self.d_val[i] == true):
@@ -113,13 +120,15 @@ class Piece:
 #sits on the last col of the grid, can be initialized along this line
 class King:
     
+    #only has a y value because x stays the same
     def __init__(self, y):
         self.y = y
         self.y_val = []
         for i in range(size_y):
             self.y_val.append(false)
         self.y_val[y] = true;
-        
+    
+    #increases y value by one, moving it on the board
     def inc_y(self):
         
         c = self.y
@@ -132,7 +141,8 @@ class King:
                 self.y_val = [true, false, false, false]
             return 1
         return 0
-                
+    
+    #decreases y value by 1, moving it on the board
     def dec_y(self):
         
         c = self.y
@@ -160,6 +170,7 @@ class King:
 
 class Laser():
     
+    #initisalizes the laser board, giving it one spot that is true
     def __init__(self, x, y, d):
         
         for i in range(size_y):
@@ -172,6 +183,7 @@ class Laser():
         self.y_val[y] = true
         self.d_val[d] = true
     
+     #moves the laser by 1, x increases
      def inc_x():
         
         for i in range(size_x):
@@ -181,7 +193,8 @@ class Laser():
             if (c != None):
                 x_val[c] = false
                 x_val[c+1] = true
-                
+        
+     #moves the laser along x axis, x decreases
      def dec_x():
         
         for i in range(size_x):
