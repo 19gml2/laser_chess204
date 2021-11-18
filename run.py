@@ -174,11 +174,19 @@ class Laser():
     #initisalizes the laser board, giving it one spot that is true
     def __init__(self, x, y, d):
         
+        self.x = x
+        self.y = y
+        self.d = d
+        
+        self.x_val = []
+        self.y_val = []
+        self.d_val = []
+        
         for i in range(size_y):
-            self.x_val[i] = false
-            self.y_val[i] = false
-            self.d_val[i] = false
-        self.x_val[4] = false
+            self.x_val.append(false)
+            self.y_val.append(false)
+            self.d_val.append(false)
+        self.x_val.append(false
         
         self.x_val[x] = true
         self.y_val[y] = true
@@ -188,61 +196,69 @@ class Laser():
      def inc_x():
         
         for i in range(size_x):
-            if (x_val[i] == true) and (i < size_x):
+            if (self.x_val[i] == true) and (i < size_x):
                 c = i
             
             if (c != None):
-                x_val[c] = false
-                x_val[c+1] = true
+                self.x_val[c] = false
+                self.x_val[c+1] = true
         
      #moves the laser along x axis, x decreases
      def dec_x():
         
         for i in range(size_x):
-            if (x_val[i] == true) and (i > 0):
+            if (self.x_val[i] == true) and (i > 0):
                 c = i
             
             if (c != None):
-                x_val[c] = false
-                x_val[c+1] = true 
+                self.x_val[c] = false
+                self.x_val[c-1] = true 
                 
     def inc_y():
         
         for i in range(size_y):
-            if (y_val[i] == true) and (i < size_y):
+            if (self.y_val[i] == true) and (i < size_y):
                 c = i
             
             if (c != None):
-                y_val[c] = false
-                y_val[c+1] = true
-                
+                          if (c < 3):
+                            self.y_val[c] = false
+                            self.y_val[c+1] = true
+                          elif (c == 3):
+                              self.y_val = [true, false, false, false]
+                        
      def dec_y():
         
         for i in range(size_y):
-            if (y_val[i] == true) and (i > 0):
+            if (self.y_val[i] == true) and (i > 0):
                 c = i
             
             if (c != None):
-                y_val[c] = false
-                y_val[c+1] = true
+                self.y_val[c] = false
+                self.y_val[c-1] = true
                 
     def rotr():
-        
-        for i in range(4):
-            if (d_val[i] == true):
-                if (i == 3):
-                    d_val[i] = false
-                    d_val[0] = true
-                else:
-                    d_val[i] = false
-                    d_val[i+1] = true
+          for i in range(4):
+                          if (self.d_val[i] == true):
+                              c = i
+                          
+        if (c != None):
+                          if (c < 3):
+                              self.d_val[c] = false
+                              self.d_val[c+1] = true
+                          else:
+                              self.d_val = [true, false, false, false]
+          
                     
     def rotl():
         
         for i in range(4):
-            if (d_val[i] == true):
-                d_val[i] = false
-                d_val[i-1] = true
+            if self.dval[i] == true):
+                c = i
+                
+        if (c != None):
+            self.d_val[c] = false
+            self.d_val[c-1] = true
             
 #makes instances
 king = King()
