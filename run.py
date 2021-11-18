@@ -27,15 +27,15 @@ class Piece:
         self.y_val = []
         self.d_val = []
     
-        #initialize all fields with false arrays
+        #initialize all fields with arrays containing the bauhaus 'false' node
         for i in range(4):
             self.x_val.append(false)
             self.y_val.append(false)
             self.d_val.append(false)
         self.x_val.append(false)
         
-        #set one item in each array to true, so e.g. x_val=[F, F, T, F, F], y_val=[F, T, F, F], d_val = [F, F, F, T]
-        #denotes a piece at (3, 2) with mirrored side facing NW.
+        #the element in each array corresponding to its position/direction is set to true, so e.g. x_val=[F, F, T, F, F],
+        #y_val=[F, T, F, F], d_val = [F, F, F, T] denotes a piece at (3, 2) with mirrored side facing NW.
         self.x_val[x] = true
         self.y_val[y] = true
         self.d_val[d] = true
@@ -48,6 +48,7 @@ class Piece:
             if (self.x_val[i] == true) and (i < 4):
                 c = i
         
+        #basic error handling; increment the x position unless it as at the max x position, or if some other error has occured.
         if (c != None):
             self.x_val[c] = false
             self.x_val[c+1] = true
