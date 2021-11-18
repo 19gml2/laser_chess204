@@ -35,6 +35,8 @@ class Piece:
         self.d_val[d] = true
         
     #variables for modifying position and orientation of pieces, to be used in constraint code
+    
+    # inc_x increases the value of x by 1 moving the piece to the right by 1 on the board
     def inc_x(self):
         for i in range(5):
             if (self.x_val[i] == true) and (i < 4):
@@ -45,7 +47,8 @@ class Piece:
             self.x_val[c+1] = true
             return 1
         return 0
-            
+    
+    # dec_x decreases the value of x by 1 which moves it to the left by 1 on the board
     def dec_x(self):
         for i in range(5):
             if (self.x_val[i] == true):
@@ -57,6 +60,7 @@ class Piece:
             return 1
         return 0
     
+    # inc_y increases the value of y by 1 which moves the piece up by 1 on the board
     def inc_y(self):
         for i in range(4):
             if (self.y_val[i] == true) and (i < 3):
@@ -68,6 +72,7 @@ class Piece:
             return 1
         return 0
     
+    # dec_y decreases the value of y by 1 which moves the piece down by 1 on the board
     def dec_y(self):
         for i in range(4):
             if (self.y_val[i] == true):
@@ -78,6 +83,7 @@ class Piece:
             self.y_val[c-1] = true
             return 1
         return 0
+    
     
     def rotr(self):
         for i in range(4):
