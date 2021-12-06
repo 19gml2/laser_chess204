@@ -268,7 +268,7 @@ p3 = Piece()
 p4 = Piece()
 l = Laser()
 
-def piece_theory():
+def piece_constraints():
 
     all_pieces = [p1, p2, p3, p4]
     for i in all_pieces:
@@ -356,6 +356,17 @@ def laser_constraints():
                     
     return E
 
+def king_constraints():
+
+    
+    E.add_constraint(king.y_val[0] | king.y_val[1] | king.y_val[2] | king.y_val[3])
+
+    for j in range(4):
+        for k in range(4):
+            if (k != j):
+                E.add_constraint(~(king.y_val[j] & king.y_val[k]))
+
+    return E
 # Build an example full theory for your setting and return it.
 #
 #  There should be at least 10 variables, and a sufficiently large formula to describe it (>50 operators).
