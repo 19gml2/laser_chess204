@@ -215,7 +215,7 @@ class Laser():
         self.d_val[d] = true
     
      #moves the laser by 1, x increases
-     def inc_x():
+     def inc_x(self):
         
         for i in range(size_x):
             if (self.x_val[i] == true) and (i < size_x):
@@ -226,7 +226,7 @@ class Laser():
                 self.x_val[c+1] = true
         
      #moves the laser along x axis, x decreases
-     def dec_x():
+     def dec_x(self):
         
         for i in range(size_x):
             if (self.x_val[i] == true) and (i > 0):
@@ -236,7 +236,7 @@ class Laser():
                 self.x_val[c] = false
                 self.x_val[c-1] = true 
                 
-    def inc_y():
+    def inc_y(self):
         
         for i in range(size_y):
             if (self.y_val[i] == true) and (i < size_y):
@@ -249,7 +249,7 @@ class Laser():
                           elif (c == 3):
                               self.y_val = [true, false, false, false]
                         
-     def dec_y():
+     def dec_y(self):
         
         for i in range(size_y):
             if (self.y_val[i] == true) and (i > 0):
@@ -259,7 +259,7 @@ class Laser():
                 self.y_val[c] = false
                 self.y_val[c-1] = true
                 
-    def rotr():
+    def rotr(self):
           for i in range(4):
                           if (self.d_val[i] == true):
                               c = i
@@ -272,7 +272,7 @@ class Laser():
                               self.d_val = [true, false, false, false]
           
                     
-    def rotl():
+    def rotl(self):
         
         for i in range(4):
             if self.dval[i] == true):
@@ -281,6 +281,28 @@ class Laser():
         if (c != None):
             self.d_val[c] = false
             self.d_val[c-1] = true
+            
+    #allows other functions to get x, y coordinates and d direction
+    def get_x(self):
+        x_current = -1
+        for i in range(5):
+            if (self.x_val[i] == true):
+                x_current = i
+        return x_current
+    
+    def get_y(self):
+        y_current = -1
+        for i in range(5):
+            if (self.y_val[i] == true):
+                y_current = i
+        return y_current
+    
+    def get_d(self):
+        d_current = -1
+        for i in range(4):
+            if (self.d_val[i] == true):
+                d_current = i
+        return d_current
             
 #makes instances
 king = King()
