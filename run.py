@@ -314,10 +314,10 @@ def laser_constraints():
     laser_check = true
     for i in range(5):
         for j in range(4):
-            if (l.x_val[i] =! p1.x_val[i] and l.y_val[j] =! p1.y_val[j] and
-            l.x_val[i] =! p2.x_val[i] and l.y_val[j] =! p2.y_val[j] and
-            l.x_val[i] =! p3.x_val[i] and l.y_val[j] =! p3.y_val[j] and
-            l.x_val[i] =! p4.x_val[i] and l.y_val[j] =! p4.y_val[j]):
+            if (l.x_val[i] != p1.x_val[i] and l.y_val[j] != p1.y_val[j] and
+            l.x_val[i] != p2.x_val[i] and l.y_val[j] != p2.y_val[j] and
+            l.x_val[i] != p3.x_val[i] and l.y_val[j] != p3.y_val[j] and
+            l.x_val[i] != p4.x_val[i] and l.y_val[j] != p4.y_val[j]):
                 laser_check = true
             else:
                 laser_check = false
