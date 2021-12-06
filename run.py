@@ -312,6 +312,26 @@ p3 = Piece()
 p4 = Piece()
 l = Laser()
 
+def check_empty(obj, x_change, y_change):
+    #tells you whether the inputted object (either a piece or a laser) can move to the desired position.
+    #x_change and y_change can both have values -1, 0 or 1 (i.e. (0, -1) represents moving one position downwards)
+    
+    #calculate desired x, y position
+    x_desired = obj.get_x() + x_change
+    y_desired = obj.get_y()  + y_change
+    
+    #check that space is not already occupied
+    for piece in all_pieces:
+        if (piece.get_x() == x_desired and piece.get_y() == y_desired):
+            return false
+    
+    #check that space is on the board
+    if (0 < x_desired or x_desired > 4 or 0 < y_desired or y_desired > 3):
+        return false
+    
+    #if space is empty and on board, can me moved to
+    return true
+
 def piece_constraints():
 
     all_pieces = [p1, p2, p3, p4]
