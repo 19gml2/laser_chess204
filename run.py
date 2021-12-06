@@ -116,6 +116,28 @@ class Piece:
                 self.d_val[c-1] = true
                 return 1
         return 0
+    
+    #allows other functions to get x, y coordinates and d direction
+    def get_x(self):
+        x_current = -1
+        for i in range(5):
+            if (self.x_val[i] == true):
+                x_current = i
+        return x_current
+    
+    def get_y(self):
+        y_current = -1
+        for i in range(5):
+            if (self.y_val[i] == true):
+                y_current = i
+        return y_current
+    
+    def get_d(self):
+        d_current = -1
+        for i in range(4):
+            if (self.d_val[i] == true):
+                d_current = i
+        return d_current
 
 
 #sits on the last col of the grid, can be initialized along this line
