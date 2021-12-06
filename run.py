@@ -144,40 +144,15 @@ class Piece:
 class King:
     
     #only has a y value because x stays the same
-    def __init__(self, y):
-        self.y = y
-        self.y_val = []
-        for i in range(size_y):
-            self.y_val.append(false)
-        self.y_val[y] = true;
+    def __init__(self):
+        self.y = 3
+        self.x = 4
     
-    #increases y value by one, moving it on the board
-    def inc_y(self):
-        
-        c = self.y
-            
-        if (c != None):
-            if (c < 3):
-                self.y_val[c] = false
-                self.y_val[c+1] = true
-            else:
-                self.y_val = [true, false, false, false]
-            return 1
-        return 0
+    def get_x(self):
+        return self.x
     
-    #decreases y value by 1, moving it on the board
-    def dec_y(self):
-        
-        c = self.y
-                    
-        if (c != None):
-            if (c > 0):
-                self.y_val[c] = false
-                self.y_val[c-1] = true
-            else:
-                self.y_val = [false, false, false, true]
-            return 1
-        return 0
+    def get_y(self):
+        return self.y
             
 #d means something different for laser vs piece
 #0 = N
@@ -312,7 +287,7 @@ p3 = Piece()
 p4 = Piece()
 l = Laser()
 
-def check_empty(obj, x_change, y_change):
+def check_valid(obj, x_change, y_change):
     #tells you whether the inputted object (either a piece or a laser) can move to the desired position.
     #x_change and y_change can both have values -1, 0 or 1 (i.e. (0, -1) represents moving one position downwards)
     
@@ -327,6 +302,10 @@ def check_empty(obj, x_change, y_change):
     
     #check that space is on the board
     if (0 < x_desired or x_desired > 4 or 0 < y_desired or y_desired > 3):
+        return false
+    
+    #check that the space is not occupied by the king(his position is hardcoded)
+    if (x_desired == 4 and y_desired == 3):
         return false
     
     #if space is empty and on board, can me moved to
