@@ -287,6 +287,8 @@ p3 = Piece()
 p4 = Piece()
 l = Laser()
 
+all_pieces = [p1, p2, p3, p4]
+
 def check_valid(obj, x_change, y_change):
     #tells you whether the inputted object (either a piece or a laser) can move to the desired position.
     #x_change and y_change can both have values -1, 0 or 1 (i.e. (0, -1) represents moving one position downwards)
@@ -313,7 +315,6 @@ def check_valid(obj, x_change, y_change):
 
 def piece_constraints():
 
-    all_pieces = [p1, p2, p3, p4]
     for i in all_pieces:
         E.add_constraint(i.x_val[0] | i.x_val[1] | i.x_val[2] | i.x_val[3] | i.x_val[4])
         E.add_constraint(i.y_val[0] | i.y_val[1] | i.y_val[2] | i.y_val[3])
@@ -345,13 +346,13 @@ def piece_constraints():
                                              
       
 def laser_constraints():
-
+ 
     # Laser cannot be in more than one x or y value at the same time.
-    E.add_constraint(l.x_val[0] | l.x_val[1] | l.x_val[2] | l.x_val[3] | l.x_val[4])
-    E.add_constraint(l.y_val[0] | l.y_val[1] | l.y_val[2] | l.y_val[3])
+    E.add_constraint(l.x_val[0] or l.x_val[1] or l.x_val[2] or l.x_val[3] or l.x_val[4])
+    E.add_constraint(l.y_val[0] or l.y_val[1] or l.y_val[2] or l.y_val[3])
     
     # Laser cannot have more than one direction.
-    E.add_constraint(l.d_val[0] | l.d_val[1] | l.d_val[2] | l.d_val[3])
+    E.add_constraint(l.d_val[0] or l.d_val[1] | l.d_val[2] | l.d_val[3])
 
     # Laser only continues if it does not make contact with any pieces and does not go out of bounds.
     laser_check = true
@@ -364,7 +365,6 @@ def laser_constraints():
                 laser_check = true
             else:
                 laser_check = false
-                return laser_check
 
     # If laser does not make contact with any pieces.
     if (laser_check == true):
@@ -377,22 +377,25 @@ def laser_constraints():
             E.add_constraint((l.x_val[5]).negate())
         # d.val 2 = S
         elif (l.d_val[2] == true and l.y_val[0] == true):
-            E.add_constraint(l.y_val[-1]).negate())
+            E.add_constraint((l.y_val[-1]).negate())
         # d.val 3 = W
         elif (l.d_val[3] == true and l.x_val[0] == true):
-            E.add_constraint(l.x_val[-1]).negate())
+            E.add_constraint((l.x_val[-1]).negate())
 
     # If laser has made contact with a piece
     else:
-        for i in range(5):
-            for j in range(4):
-                for k in range(4):
-                    if (l.x_val[i] == p1.x_val[i] and l.y_val[j] == p1.y_val[j] and
-                        l.d_val[k] and p1.d_val[k]):
-                        if (l.d_val[0] == true or l.d_val[1] == true or l.d_val[2]):
-                            E.add_constraint(l.d_val[k+1])
-                        elif (l.d_val[3] == true):
-                            E.add_constraint(l.d_val[0])
+        for k in all_pieces:
+            for i in range(5):
+                for j in range(4):
+                    
+                    if (l.x_val[i] == k.x_val[i] and l.y_val[j] == k.y_val[j] and
+                        l.d_val[0] and k.d_val[1] or l.d_val[1] and k.d_val[2] or l.d_val[2] and k.d_val[3] or l.d_val[3] and k.d_val[0]):
+                        l.rotr()
+                        
+                    if (l.x_val[i] == k.x_val[i] and l.y_val[j] == k.y_val[j] and
+                        l.d_val[0] and k.d_val[2] or l.d_val[1] and k.d_val[3] or l.d_val[2] and k.d_val[0] or l.d_val[3] and k.d_val[1]):
+                        l.rotl()
+                        
                     # If laser makes contact with piece, but wrong direction.
                     else:
                         E.add_constraint((l.d_val[k]).negate())
