@@ -13,6 +13,7 @@ size_y = 4
 
 
 #represents a single piece on the board and stores it's coordinates and which way it faces
+@proposition(E)
 class Piece:
     
     #initializes piece, gives coordinates and direction
@@ -142,6 +143,7 @@ class Piece:
 
 
 #sits on the last col of the grid, can be initialized along this line
+@proposition(E)
 class King:
     
     #only has a y value because x stays the same
@@ -167,6 +169,7 @@ class King:
 #2 = SW
 #3 = NW
 
+@proposition(E)
 class Laser:
     
     #initisalizes the laser board, giving it one spot that is true
@@ -184,14 +187,14 @@ class Laser:
             self.x_val.append(false)
             self.y_val.append(false)
             self.d_val.append(false)
-        self.x_val.append(false
+        self.x_val.append(false)
         
         self.x_val[x] = true
         self.y_val[y] = true
         self.d_val[d] = true
     
      #moves the laser by 1, x increases
-     def inc_x(self):
+    def inc_x(self):
         
         for i in range(size_x):
             if (self.x_val[i] == true) and (i < size_x):
@@ -202,7 +205,7 @@ class Laser:
                 self.x_val[c+1] = true
         
      #moves the laser along x axis, x decreases
-     def dec_x(self):
+    def dec_x(self):
         
         for i in range(size_x):
             if (self.x_val[i] == true) and (i > 0):
@@ -225,7 +228,7 @@ class Laser:
                           elif (c == 3):
                               self.y_val = [true, false, false, false]
                         
-     def dec_y(self):
+    def dec_y(self):
         
         for i in range(size_y):
             if (self.y_val[i] == true) and (i > 0):
@@ -236,22 +239,22 @@ class Laser:
                 self.y_val[c-1] = true
                 
     def rotr(self):
-          for i in range(4):
-                          if (self.d_val[i] == true):
-                              c = i
+        for i in range(4):
+            if (self.d_val[i] == true):
+                c = i
                           
         if (c != None):
-                          if (c < 3):
-                              self.d_val[c] = false
-                              self.d_val[c+1] = true
-                          else:
-                              self.d_val = [true, false, false, false]
+            if (c < 3):
+                self.d_val[c] = false
+                self.d_val[c+1] = true
+            else:
+                self.d_val = [true, false, false, false]
           
                     
     def rotl(self):
         
         for i in range(4):
-            if self.dval[i] == true):
+            if (self.dval[i] == true):
                 c = i
                 
         if (c != None):
@@ -318,12 +321,12 @@ def check_random():
                 return x, y, d
 
 #runs the laser until out of bounud, hits a piece or hits the king
-def run_laser
+def run_laser():
 
     while(true):
         
         #hits king
-        if (l.get_x() = 4 and l.get_y() = 3):
+        if (l.get_x() == 4 and l.get_y() == 3):
             return true
         
         #curr direction of l
@@ -332,32 +335,32 @@ def run_laser
         #makes moveset for l
         goin_x = 0
         goin_y = 0
-        if (direction = 0):
+        if (direction == 0):
             goin_x = 0
             goin_y = 1
-        if (direction = 1):
+        if (direction == 1):
             goin_x = 1
             goin_y = 0
-        if (direction = 2):
+        if (direction == 2):
             goin_x = 0
             goin_y = -1
-        if (direction = 3):
+        if (direction == 3):
             goin_x = -1
             goin_y = 0
            
         #checks if move is valid (if there's nothing there then true and it moves the laser, else changes directions or ends)
         can_move = check_valid(l, goin_x, goin_y)
         if (can_move == true):
-            if (direction = 0):
+            if (direction == 0):
                 l.inc_y()
-            if (direction = 1):
+            if (direction == 1):
                 l.inc_x()
-            if (direction = 2):
+            if (direction == 2):
                 l.dec_y()
-            if (direction = 3):
+            if (direction == 3):
                 l.dec_x()
                 
-        else
+        else:
             x_desired = l.get_x() + goin_x
             y_desired = l.get_y()  + goin_y
             
@@ -374,23 +377,23 @@ def run_laser
                 return false
             
             #hits a non-mirrored side
-            if !((piece_direction + direction) % 4) == ((direction + 1) % 4) or ((direction +2) % 4):
+            if ((piece_direction + direction) % 4) != ((direction + 1) % 4) and ((piece_direction + direction)) % 4 != ((direction +2) % 4):
                 return false
             
             #moves into new spot
-            if (direction = 0):
+            if (direction == 0):
                 l.inc_y()
-            if (direction = 1):
+            if (direction == 1):
                 l.inc_x()
-            if (direction = 2):
+            if (direction == 2):
                 l.dec_y()
-            if (direction = 3):
+            if (direction == 3):
                 l.dec_x()
                 
             #hits a mirror, changes direction accordingly
-            if (piece_direction + direction) % 4) == ((direction + 1) % 4):
+            if (((piece_direction + direction) % 4) == ((direction + 1) % 4)):
                 l.rotr()
-            else
+            else:
                 l.rotl()
             
 def check_valid(obj, x_change, y_change):
@@ -431,11 +434,11 @@ def find_all_moves():
         all_moves[i].append([0, 0, 1])
         
     for i in range(4):
-        piece = all_pieces[i]:
-            for x_move in range(-1, 2):
-                for y_move in range(-1, 2):
-                    if (check_valid(piece, x_move, y_move)):
-                        all_moves[i].append([x_move, y_move, 0])
+        piece = all_pieces[i]
+        for x_move in range(-1, 2):
+            for y_move in range(-1, 2):
+                if (check_valid(piece, x_move, y_move)):
+                    all_moves[i].append([x_move, y_move, 0])
         
         
     return all_moves
@@ -463,20 +466,12 @@ def piece_constraints():
             for k in range(5):
                 for p in range(4):
                     if (i != j):
-                        E.add_constraint(~((i.x_val[k] & j.x_val[k]) & (i.y_val[p] & j.y_val[p]))
+                        E.add_constraint(~((i.x_val[k] & j.x_val[k]) & (i.y_val[p] & j.y_val[p])))
 
                         #king cannot be in the same spot
-                        if (k == 4)
-                            E.add_constraint(~((i.x_val[k]) & (i.y_val[p] & king.y_val[p]))
-                                                                                        
-        if (i.x_val[4] == true):
-            E.add_constraint((i.inc_x().negate()))
-        if (i.x_val[0] == true):
-            E.add_constraint((i.dec_x().negate()))
-        if (i.y_val[3] == true):
-            E.add_constraint((i.inc_y().negate()))
-        if (i.y_val[0] == true):
-            E.add_constraint((i.dec_y().negate()))
+                        if (k == 4):
+                            E.add_constraint(~((i.x_val[k]) & (i.y_val[p] & king.y_val[p])))
+
                                              
                                              
     return E
@@ -484,7 +479,7 @@ def piece_constraints():
       
 def laser_constraints():
  
-   all_pieces = [p1, p2, p3, p4]
+    all_pieces = [p1, p2, p3, p4]
     # Laser cannot be in more than one x or y value at the same time.
     E.add_constraint(l.x_val[0] or l.x_val[1] or l.x_val[2] or l.x_val[3] or l.x_val[4])
     E.add_constraint(l.y_val[0] or l.y_val[1] or l.y_val[2] or l.y_val[3])
@@ -502,23 +497,8 @@ def laser_constraints():
                 else:
                     laser_check = false
 
-    # If laser does not make contact with any pieces.
-    if (laser_check == true):
-        # Check if laser goes out of bounds based on x/y value and direction.
-        # d.val 0 = N
-        if (l.d_val[0] == true and l.y_val[3] == true):
-            E.add_constraint((l.inc_y()).negate())
-        # d.val 1 = E
-        elif (l.d_val[1] == true and l.x_val[4] == true):
-            E.add_constraint((l.inc_x()).negate())
-        # d.val 2 = S
-        elif (l.d_val[2] == true and l.y_val[0] == true):
-            E.add_constraint((l.dec_y()).negate())
-        # d.val 3 = W
-        elif (l.d_val[3] == true and l.x_val[0] == true):
-            E.add_constraint((l.dec_x()).negate())
 
-    # If laser has made contact with a piece
+    """# If laser has made contact with a piece
     else:
         for k in all_pieces:
             for i in range(5):
@@ -534,11 +514,15 @@ def laser_constraints():
                         
                     # If laser makes contact with piece, but wrong direction.
                     else:
-                        E.add_constraint((l.d_val[k]).negate())
+                        E.add_constraint((l.d_val[k]).negate())"""
                     
     return E
 
 def example_theory():
+    piece_constraints()
+    laser_constraints()
+    
+
     return E
 
 
