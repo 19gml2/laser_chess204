@@ -2,6 +2,7 @@
 from bauhaus import Encoding, proposition, constraint
 from bauhaus.utils import count_solutions, likelihood
 from nnf import true, false
+import random
 
 # Encoding that will store all of your constraints
 E = Encoding()
@@ -537,7 +538,8 @@ def laser_constraints():
                     
     return E
 
-def king_constraints():
+def example_theory():
+    return E
 
 
 # Build an example full theory for your setting and return it.
