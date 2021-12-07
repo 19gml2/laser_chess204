@@ -167,7 +167,7 @@ class King:
 #2 = SW
 #3 = NW
 
-class Laser():
+class Laser:
     
     #initisalizes the laser board, giving it one spot that is true
     def __init__(self, x, y, d):
