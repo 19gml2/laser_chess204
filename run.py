@@ -539,22 +539,13 @@ def laser_constraints():
 
 def king_constraints():
 
-    
-    E.add_constraint(king.y_val[0] | king.y_val[1] | king.y_val[2] | king.y_val[3])
 
-    for j in range(4):
-        for k in range(4):
-            if (k != j):
-                E.add_constraint(~(king.y_val[j] & king.y_val[k]))
-
-    return E
 # Build an example full theory for your setting and return it.
 #
 #  There should be at least 10 variables, and a sufficiently large formula to describe it (>50 operators).
 #  This restriction is fairly minimal, and if there is any concern, reach out to the teaching staff to clarify
 #  what the expectations are.
-
-
+                                             
 
 if __name__ == "__main__":
 
