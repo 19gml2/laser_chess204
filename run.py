@@ -284,14 +284,7 @@ class Laser:
         return d_current
             
 #makes instances
-king = King()
-p1 = Piece()
-p2 = Piece()
-p3 = Piece()
-p4 = Piece()
-l = Laser()
 
-all_pieces = [p1, p2, p3, p4]
 
 def rand_piece_pos():
 
@@ -443,49 +436,47 @@ def find_all_moves():
         
     return all_moves
 
-def piece_constraints():
+def piece_constraints(p1, p2, p3, p4, king, l):
+
+    all_pieces = [p1, p2, p3, p4]
 
     for i in all_pieces:
-        E.add_constraint(i.x_val[0] | i.x_val[1] | i.x_val[2] | i.x_val[3] | i.x_val[4])
-        E.add_constraint(i.y_val[0] | i.y_val[1] | i.y_val[2] | i.y_val[3])
-        E.add_constraint(i.d_val[0] | i.d_val[1] | i.d_val[2] | i.d_val[3])
+        xvals = [i.x_val[0], i.x_val[1], i.x_val[2], i.x_val[3], i.x_val[4]]
+        yvals = [i.y_val[0], i.y_val[1], i.y_val[2], i.y_val[3]]
+        dvals = [i.d_val[0], i.d_val[1], i.d_val[2], i.d_val[3]]
+        constraint.add_exactly_one(E, *(xvals))
+        constraint.add_exactly_one(E, *(yvals))
+        constraint.add_exactly_one(E, *(dvals))
 
         
-        for j in range(5):
-            for k in range(5):
-                if (k != j):
-                    E.add_constraint(~(i.x_val[j] & i.x_val[k]))
-        for j in range(4):
-            for k in range(4):
-                if (k != j):
-                    E.add_constraint(~(i.y_val[j] & i.y_val[k]))
-                    E.add_constraint(~(i.d_val[j] & i.d_val[k]))
+        
                     
         #cannot take up the same spot as another piece
         for j in all_pieces:
             for k in range(5):
                 for p in range(4):
                     if (i != j):
-                        E.add_constraint(~((i.x_val[k] & j.x_val[k]) & (i.y_val[p] & j.y_val[p])))
+                        E.add_constraint(((i.x_val[k] & j.x_val[k]) & (i.y_val[p] & j.y_val[p])).negate())
 
                         #king cannot be in the same spot
                         if (k == 4):
-                            E.add_constraint(~((i.x_val[k]) & (i.y_val[p] & king.y_val[p])))
+                            E.add_constraint(((i.x_val[k]) & (i.y_val[3])).negate())
 
                                              
                                              
-    return E
-                                             
       
-def laser_constraints():
+def laser_constraints(p1, p2, p3, p4, king, l):
  
     all_pieces = [p1, p2, p3, p4]
     # Laser cannot be in more than one x or y value at the same time.
-    E.add_constraint(l.x_val[0] or l.x_val[1] or l.x_val[2] or l.x_val[3] or l.x_val[4])
-    E.add_constraint(l.y_val[0] or l.y_val[1] or l.y_val[2] or l.y_val[3])
+    xvals = [l.x_val[0], l.x_val[1], l.x_val[2], l.x_val[3], l.x_val[4]]
+    yvals = [l.y_val[0], l.y_val[1], l.y_val[2], l.y_val[3]]
+    dvals = [l.d_val[0], l.d_val[1], l.d_val[2], l.d_val[3]]
+    constraint.add_exactly_one(E, *(xvals))
+    constraint.add_exactly_one(E, *(yvals))
     
     # Laser cannot have more than one direction.
-    E.add_constraint(l.d_val[0] or l.d_val[1] | l.d_val[2] | l.d_val[3])
+    constraint.add_exactly_one(E, *(dvals))
 
     # Laser only continues if it does not make contact with any pieces and does not go out of bounds.
     laser_check = true
@@ -516,11 +507,20 @@ def laser_constraints():
                     else:
                         E.add_constraint((l.d_val[k]).negate())"""
                     
-    return E
+
 
 def example_theory():
-    piece_constraints()
-    laser_constraints()
+    p1 = Piece(2, 0, 3)
+    p2 = Piece(4, 0, 1)
+    p3 = Piece(1, 3, 1)
+    p4 = Piece(0, 2, 0)
+    king = King()
+    l = Laser(0, 0, 1)
+
+    all_pieces = [p1, p2, p3, p4]
+    
+    piece_constraints(p1, p2, p3, p4, king, l)
+    laser_constraints(p1, p2, p3, p4, king, l)
     
 
     return E
@@ -550,4 +550,3 @@ if __name__ == "__main__":
         # Literals are compiled to NNF here
         print(" %s: %.2f" % (vn, likelihood(T, v)))
     print()
-
