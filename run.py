@@ -289,6 +289,33 @@ l = Laser()
 
 all_pieces = [p1, p2, p3, p4]
 
+def rand_piece_pos():
+
+    for p in all_pieces:
+            x, y, d = check_random()
+            p = Piece(x, y, d)
+
+             
+def check_random():
+
+    pos = [4][4]
+    x = random.randint(0, 4)
+    y = random.randint(0, 3)
+    d = random.randint(0, 3)
+    for i in pos:
+        for j in i:
+            if (x == i):
+                if (y == j):
+                   check_random()
+                else:
+                    pos[0].append(x)
+                    pos[1].append(y)
+                    return x, y, d
+            else:
+                pos[0].append(x)
+                pos[1].append(y)
+                return x, y, d
+
 #runs the laser until out of bounud, hits a piece or hits the king
 def run_laser
 
