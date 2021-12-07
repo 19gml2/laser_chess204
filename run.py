@@ -341,7 +341,17 @@ def piece_constraints():
                         #king cannot be in the same spot
                         if (k == 4)
                             E.add_constraint(~((i.x_val[k]) & (i.y_val[p] & king.y_val[p]))
-        
+                                                                                        
+        if (i.x_val[4] == true):
+            E.add_constraint((i.inc_x().negate()))
+        if (i.x_val[0] == true):
+            E.add_constraint((i.dec_x().negate()))
+        if (i.y_val[3] == true):
+            E.add_constraint((i.inc_y().negate()))
+        if (i.y_val[0] == true):
+            E.add_constraint((i.dec_y().negate()))
+                                             
+                                             
     return E
                                              
       
