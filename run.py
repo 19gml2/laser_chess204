@@ -289,6 +289,82 @@ l = Laser()
 
 all_pieces = [p1, p2, p3, p4]
 
+#runs the laser until out of bounud, hits a piece or hits the king
+def run_laser
+
+    while(true):
+        
+        #hits king
+        if (l.get_x() = 4 and l.get_y() = 3):
+            return true
+        
+        #curr direction of l
+        direction = l.get_d()
+        
+        #makes moveset for l
+        goin_x = 0
+        goin_y = 0
+        if (direction = 0):
+            goin_x = 0
+            goin_y = 1
+        if (direction = 1):
+            goin_x = 1
+            goin_y = 0
+        if (direction = 2):
+            goin_x = 0
+            goin_y = -1
+        if (direction = 3):
+            goin_x = -1
+            goin_y = 0
+           
+        #checks if move is valid (if there's nothing there then true and it moves the laser, else changes directions or ends)
+        can_move = check_valid(l, goin_x, goin_y)
+        if (can_move == true):
+            if (direction = 0):
+                l.inc_y()
+            if (direction = 1):
+                l.inc_x()
+            if (direction = 2):
+                l.dec_y()
+            if (direction = 3):
+                l.dec_x()
+                
+        else
+            x_desired = l.get_x() + goin_x
+            y_desired = l.get_y()  + goin_y
+            
+            #never obtainable
+            piece_direction = 5
+            
+            #finds piece at spot
+            for piece in all_pieces:
+                if (piece.get_x() == x_desired and piece.get_y() == y_desired):
+                    piece_direction = piece.get_d()
+                    break
+            # if no piece is there it ends the path
+            if (piece_direction == 5):
+                return false
+            
+            #hits a non-mirrored side
+            if !((piece_direction + direction) % 4) == ((direction + 1) % 4) or ((direction +2) % 4):
+                return false
+            
+            #moves into new spot
+            if (direction = 0):
+                l.inc_y()
+            if (direction = 1):
+                l.inc_x()
+            if (direction = 2):
+                l.dec_y()
+            if (direction = 3):
+                l.dec_x()
+                
+            #hits a mirror, changes direction accordingly
+            if (piece_direction + direction) % 4) == ((direction + 1) % 4):
+                l.rotr()
+            else
+                l.rotl()
+            
 def check_valid(obj, x_change, y_change):
     #tells you whether the inputted object (either a piece or a laser) can move to the desired position.
     #x_change and y_change can both have values -1, 0 or 1 (i.e. (0, -1) represents moving one position downwards)
