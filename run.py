@@ -313,6 +313,29 @@ def check_valid(obj, x_change, y_change):
     #if space is empty and on board, can me moved to
     return true
 
+def find_all_moves():
+    #find all of the possible moves (not necessarily solutions), and add them to a three dimensional array all_moves
+    #such that, for example, all_moves[1][4] = [1, -1, 0] denotes that the fifth move available to 
+    #piece 1 is to increment x, decrement y, and leave direction constant
+    all_moves = []
+    for i in range(4):
+        all_moves.append([])
+        all_moves[i].append([])
+    
+    for i in range(4):
+        all_moves[i][0] = [0, 0, -1]
+        all_moves[i].append([0, 0, 1])
+        
+    for i in range(4):
+        piece = all_pieces[i]:
+            for x_move in range(-1, 2):
+                for y_move in range(-1, 2):
+                    if (check_valid(piece, x_move, y_move)):
+                        all_moves[i].append([x_move, y_move, 0])
+        
+        
+    return all_moves
+
 def piece_constraints():
 
     for i in all_pieces:
