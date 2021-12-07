@@ -554,21 +554,6 @@ def king_constraints():
 #  This restriction is fairly minimal, and if there is any concern, reach out to the teaching staff to clarify
 #  what the expectations are.
 
-def constraint_function():
-    # Add custom constraints by creating formulas with the variables you created. 
-    for x in range(size_x):
-        E.add_constraint(
-    
-    E.add_constraint((a | b) & ~x)
-    # Implication
-    E.add_constraint(y >> z)
-    # Negate a formula
-    E.add_constraint((x & y).negate())
-    # You can also add more customized "fancy" constraints. Use case: you don't want to enforce "exactly one"
-    # for every instance of BasicPropositions, but you want to enforce it for a, b, and c.:
-    constraint.add_exactly_one(E, a, b, c)
-
-    return E
 
 
 if __name__ == "__main__":
