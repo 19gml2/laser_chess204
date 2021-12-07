@@ -447,7 +447,8 @@ def constraint_function():
 
 if __name__ == "__main__":
 
-    T = example_theory()
+    T = piece_constraints()
+    T = laser_constraints()
     # Don't compile until you're finished adding all your constraints!
     T = T.compile()
     # After compilation (and only after), you can check some of the properties
